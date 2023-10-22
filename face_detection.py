@@ -6,9 +6,9 @@ from google_vision_ai import prepare_image_local, prepare_image_web, draw_bounda
 # instantiate a client
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'vision-ai-demo-402815-3045b2bd90da.json'
 client = vision.ImageAnnotatorClient()
-image_file_path = './images/Statue_of_Liberty.jpg'
+image_file_path = './images/james.jpeg'
 image = prepare_image_local(image_file_path)
-va = VisionAI(client, image)
-landmarks = va.landmark_detection()
-for landmark in landmarks:
-    print(landmark.description)
+response = client.face_detection(image=image)
+faces = response.face_annotations
+for f in faces:
+    print(f)
